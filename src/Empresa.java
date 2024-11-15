@@ -32,4 +32,16 @@ public class Empresa {
     public Map<String, Concesionario> getGrupo() {
         return grupo;
     }
+
+    public void agregarConcesionario(String ciudad, Concesionario concesionario) {
+        grupo.put(ciudad, concesionario);
+    }
+
+    public Concesionario obtenerConcesionario(String ciudad) {
+        return grupo.get(ciudad);
+    }
+
+    public void incrementarFacturacion(double monto) {
+        this.facturacionEmpresa += monto;
+    }
 }

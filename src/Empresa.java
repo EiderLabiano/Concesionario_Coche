@@ -1,18 +1,38 @@
-import javax.swing.text.Keymap;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Empresa {
-    private String nombre; // Nombre de la empresa
-    private double facturacionEmpresa; // Dinero vendido
-    private Map<String, Concesionario> grupo; // KeyMap con sede (ciudad) y concesionario
+    private String nombre;
+    private double facturacionEmpresa;
+    private HashMap<String, Concesionario> grupo;
 
+    // Constructor: Inicializa nombre y facturacionEmpresa en 0
     public Empresa(String nombre) {
         this.nombre = nombre;
-        this.facturacionEmpresa = 0.0;
+        this.facturacionEmpresa = 0;
         this.grupo = new HashMap<>();
     }
 
+    // Método para crear una nueva sede con un concesionario
+    public void crearSede(String ciudad, int tamanoMaximo) {
+        if (!grupo.containsKey(ciudad)) {
+            Concesionario concesionario = new Concesionario(tamanoMaximo);
+            grupo.put(ciudad, concesionario);
+            System.out.println("Sede creada en la ciudad: " + ciudad);
+        } else {
+            System.out.println("Ya existe una sede en esta ciudad.");
+        }
+    }
+
+    // Método para calcular la facturación total de todos los concesionarios
+    public void facturacionTotal() {
+        double total = 0;
+        for (Concesionario concesionario : grupo.values()) {
+            total += concesionario.getFacturacionLocal();
+        }
+        facturacionEmpresa = total;
+    }
+
+    // Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -29,19 +49,11 @@ public class Empresa {
         this.facturacionEmpresa = facturacionEmpresa;
     }
 
-    public Map<String, Concesionario> getGrupo() {
+    public HashMap<String, Concesionario> getGrupo() {
         return grupo;
     }
 
-    public void agregarConcesionario(String ciudad, Concesionario concesionario) {
-        grupo.put(ciudad, concesionario);
-    }
-
-    public Concesionario obtenerConcesionario(String ciudad) {
-        return grupo.get(ciudad);
-    }
-
-    public void incrementarFacturacion(double monto) {
-        this.facturacionEmpresa += monto;
+    public void setGrupo(HashMap<String, Concesionario> grupo) {
+        this.grupo = grupo;
     }
 }

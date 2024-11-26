@@ -33,9 +33,23 @@ public class Concesionario {
             facturacionLocal += cocheVendido.getPrecio();
         }
     }
-
-    public int getTamanyo() {
-        return tamanyo;
+    public ArrayList<Coche> buscarMarca(String marca){
+        ArrayList<Coche> resultado = new ArrayList<>();
+        for (Coche coche : listadoCoches) {
+            if (coche.getMarca().equalsIgnoreCase(marca)) {
+                resultado.add(coche);
+            }
+        }
+        return resultado;
+    }
+    public ArrayList<Coche> buscarModelo(String modelo){
+        ArrayList<Coche> resultado = new ArrayList<>();
+        for (Coche coche : listadoCoches) {
+            if (coche.getModelo().equalsIgnoreCase(modelo)) {
+                resultado.add(coche);
+            }
+        }
+        return resultado;
     }
 
     public double getFacturacionLocal() {
@@ -44,5 +58,13 @@ public class Concesionario {
 
     public List<Coche> getListadoCoches() {
         return listadoCoches;
+    }
+
+    @Override
+    public String toString() {
+        return "Concesionario{" +
+                "facturacionLocal=" + facturacionLocal +
+                ", listadoCoches=" + listadoCoches +
+                '}';
     }
 }

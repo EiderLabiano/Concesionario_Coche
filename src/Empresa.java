@@ -11,9 +11,9 @@ public class Empresa {
         this.grupo = new HashMap<>();
     }
 
-    public void crearSede(String ciudad, int tamanoMaximo) {
+    public void crearSede(String ciudad, int tamanyo) {
         if (!grupo.containsKey(ciudad)) {
-            Concesionario concesionario = new Concesionario(tamanoMaximo);
+            Concesionario concesionario = new Concesionario(tamanyo);
             grupo.put(ciudad, concesionario);
             System.out.println("Sede creada en la ciudad: " + ciudad);
         } else {
@@ -29,27 +29,16 @@ public class Empresa {
         facturacionEmpresa = total;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Concesionario getConcesionario(String ciudad) {
+        return grupo.get(ciudad);
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getFacturacionEmpresa() {
-        return facturacionEmpresa;
-    }
-
-    public void setFacturacionEmpresa(double facturacionEmpresa) {
-        this.facturacionEmpresa = facturacionEmpresa;
-    }
-
-    public HashMap<String, Concesionario> getGrupo() {
-        return grupo;
-    }
-
-    public void setGrupo(HashMap<String, Concesionario> grupo) {
-        this.grupo = grupo;
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "nombre='" + nombre + '\'' +
+                ", facturacionEmpresa=" + facturacionEmpresa +
+                ", grupo=" + grupo +
+                '}';
     }
 }

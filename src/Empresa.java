@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.Map;
 
 public class Empresa {
     private String nombre;
@@ -12,38 +11,30 @@ public class Empresa {
         this.grupo = new HashMap<>();
     }
 
-    public void crearSede(String ciudad, int tamanyo) {
+    public boolean crearSede(String ciudad, int tamanyo) {
         if (!grupo.containsKey(ciudad)) {
-            Concesionario concesionario = new Concesionario(tamanyo);
-            grupo.put(ciudad, concesionario);
-            System.out.println("Sede creada en la ciudad: " + ciudad);
-        } else {
-            System.out.println("Ya existe una sede en esta ciudad.");
+            grupo.put(ciudad, new Concesionario(tamanyo));
+            return true;
         }
-    }
-
-    public void facturacionTotal() {
-        double total = 0;
-        for (Concesionario concesionario : grupo.values()) {
-            total += concesionario.getFacturacionLocal();
-        }
-        facturacionEmpresa = total;
+        System.out.println("ERROR: La sede ya existe.");
+        return false;
     }
 
     public Concesionario getConcesionario(String ciudad) {
         return grupo.get(ciudad);
     }
 
-    @Override
-    public String toString() {
-        return "Empresa{" +
-                "nombre='" + nombre + '\'' +
-                ", facturacionEmpresa=" + facturacionEmpresa +
-                ", grupo=" + grupo +
-                '}';
+    public void facturacionTotal() {
+        facturacionEmpresa = grupo.values().stream()
+                .mapToDouble(Concesionario::getFacturacionLocal)
+                .sum();
     }
 
     public HashMap<String, Concesionario> getGrupo() {
         return grupo;
+    }
+
+    public double getFacturacionEmpresa() {
+        return facturacionEmpresa;
     }
 }

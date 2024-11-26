@@ -1,10 +1,9 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Concesionario {
     private final int tamanyo;
     private double facturacionLocal;
-    private ArrayList<Coche> listadoCoches;
+    private final ArrayList<Coche> listadoCoches;
 
     public Concesionario(int tamanyo) {
         this.tamanyo = tamanyo;
@@ -12,59 +11,53 @@ public class Concesionario {
         this.listadoCoches = new ArrayList<>();
     }
 
-    public void adquirirCoche(Coche coche) {
+    public boolean adquirirCoche(Coche coche) {
         if (listadoCoches.size() < tamanyo) {
             listadoCoches.add(coche);
+            return true;
         } else {
             System.out.println("Concesionario lleno, no se puede introducir el coche");
+            return false;
         }
     }
 
-    public void venderCoche(String matricula) {
-        Coche cocheVendido = null;
+    public boolean venderCoche(String matricula) {
         for (Coche coche : listadoCoches) {
             if (coche.getMatricula().equals(matricula)) {
-                cocheVendido = coche;
-                break;
+                listadoCoches.remove(coche);
+                facturacionLocal += coche.getPrecio();
+                return true;
             }
         }
-        if (cocheVendido != null) {
-            listadoCoches.remove(cocheVendido);
-            facturacionLocal += cocheVendido.getPrecio();
-        }
+        System.out.println("ERROR: Matrícula no encontrada.");
+        return false;
     }
-    public ArrayList<Coche> buscarMarca(String marca){
-        ArrayList<Coche> resultado = new ArrayList<>();
+
+    public ArrayList<Coche> buscarMarca(String marca) {
+        ArrayList<Coche> resultados = new ArrayList<>();
         for (Coche coche : listadoCoches) {
             if (coche.getMarca().equalsIgnoreCase(marca)) {
-                resultado.add(coche);
+                resultados.add(coche);
             }
         }
-        return resultado;
+        return resultados;
     }
-    public ArrayList<Coche> buscarModelo(String modelo){
-        ArrayList<Coche> resultado = new ArrayList<>();
+
+    public ArrayList<Coche> buscarModelo(String modelo) {
+        ArrayList<Coche> resultados = new ArrayList<>();
         for (Coche coche : listadoCoches) {
             if (coche.getModelo().equalsIgnoreCase(modelo)) {
-                resultado.add(coche);
+                resultados.add(coche);
             }
         }
-        return resultado;
+        return resultados;
+    }
+
+    public ArrayList<Coche> getListadoCoches() {
+        return listadoCoches;
     }
 
     public double getFacturacionLocal() {
         return facturacionLocal;
-    }
-
-    public List<Coche> getListadoCoches() {
-        return listadoCoches;
-    }
-
-    @Override
-    public String toString() {
-        return "Concesionario{" +
-                "facturacionLocal=" + facturacionLocal +
-                ", listadoCoches=" + listadoCoches +
-                '}';
     }
 }

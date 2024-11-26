@@ -1,14 +1,48 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Concesionario {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    private final int tamanyo;
+    private double facturacionLocal;
+    private ArrayList<Coche> listadoCoches;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public Concesionario(int tamanyo) {
+        this.tamanyo = tamanyo;
+        this.facturacionLocal = 0;
+        this.listadoCoches = new ArrayList<>();
+    }
+
+    public void adquirirCoche(Coche coche) {
+        if (listadoCoches.size() < tamanyo) {
+            listadoCoches.add(coche);
+        } else {
+            System.out.println("Concesionario lleno, no se puede introducir el coche");
         }
+    }
+
+    public void venderCoche(String matricula) {
+        Coche cocheVendido = null;
+        for (Coche coche : listadoCoches) {
+            if (coche.getMatricula().equals(matricula)) {
+                cocheVendido = coche;
+                break;
+            }
+        }
+        if (cocheVendido != null) {
+            listadoCoches.remove(cocheVendido);
+            facturacionLocal += cocheVendido.getPrecio();
+        }
+    }
+
+    public int getTamanyo() {
+        return tamanyo;
+    }
+
+    public double getFacturacionLocal() {
+        return facturacionLocal;
+    }
+
+    public List<Coche> getListadoCoches() {
+        return listadoCoches;
     }
 }

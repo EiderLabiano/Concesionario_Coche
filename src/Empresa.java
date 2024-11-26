@@ -5,14 +5,12 @@ public class Empresa {
     private double facturacionEmpresa;
     private HashMap<String, Concesionario> grupo;
 
-    // Constructor: Inicializa nombre y facturacionEmpresa en 0
     public Empresa(String nombre) {
         this.nombre = nombre;
         this.facturacionEmpresa = 0;
         this.grupo = new HashMap<>();
     }
 
-    // Método para crear una nueva sede con un concesionario
     public void crearSede(String ciudad, int tamanoMaximo) {
         if (!grupo.containsKey(ciudad)) {
             Concesionario concesionario = new Concesionario(tamanoMaximo);
@@ -23,7 +21,6 @@ public class Empresa {
         }
     }
 
-    // Método para calcular la facturación total de todos los concesionarios
     public void facturacionTotal() {
         double total = 0;
         for (Concesionario concesionario : grupo.values()) {
@@ -32,7 +29,6 @@ public class Empresa {
         facturacionEmpresa = total;
     }
 
-    // Getters y Setters
     public String getNombre() {
         return nombre;
     }

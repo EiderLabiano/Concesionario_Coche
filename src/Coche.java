@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Coche {
     private String marca;
     private String modelo;
@@ -7,7 +5,7 @@ public class Coche {
     private int anyo;
     private double precio;
     private double kms;
-    public Coche(String marca, String modelo, String matricula, int anyo, double precio) {
+    public Coche(String marca, String modelo, String matricula, int anyo, double precio, double kms) {
         this.marca = marca;
         this.modelo = modelo;
         this.matricula = matricula;
@@ -39,6 +37,14 @@ public class Coche {
 
     public String getModelo() {
         return modelo;
+    }
+
+    public double getKms() {
+        return kms;
+    }
+
+    public int getAnyo() {
+        return anyo;
     }
 
     @Override

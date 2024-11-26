@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class Empresa {
     private String nombre;
@@ -40,5 +41,9 @@ public class Empresa {
                 ", facturacionEmpresa=" + facturacionEmpresa +
                 ", grupo=" + grupo +
                 '}';
+    }
+
+    public HashMap<String, Concesionario> getGrupo() {
+        return grupo;
     }
 }

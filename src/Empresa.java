@@ -25,10 +25,13 @@ public class Empresa {
     }
 
     public void facturacionTotal() {
-        facturacionEmpresa = grupo.values().stream()
-                .mapToDouble(Concesionario::getFacturacionLocal)
-                .sum();
+        double total = 0;
+        for (Concesionario concesionario : grupo.values()) {
+            total += concesionario.getFacturacionLocal();
+        }
+        facturacionEmpresa = total;
     }
+
 
     public HashMap<String, Concesionario> getGrupo() {
         return grupo;
